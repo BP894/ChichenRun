@@ -74,11 +74,11 @@ public class TestPlayerControler : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        spawnManager.SpawnTriggerEntered();
+        spawnManager.SpawnTriggerEntered(other);
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("GROUND"))
+        if(collision.gameObject.CompareTag("GROUND") || collision.gameObject.CompareTag("OBSTACLE"))
         {
             isJump = false;
         }

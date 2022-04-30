@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SPAWNTRIGGER
   - GROUND
+  - OBSTACLE
   layers:
   - Default
   - TransparentFX

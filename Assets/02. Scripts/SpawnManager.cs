@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    RoadSpawner roadSpawner;
+    private RoadSpawner roadSpawner;
+    private ObstacleSpawner obstacleSpawner;
 
     // Start is called before the first frame update
     void Start()
     {
-        roadSpawner = GetComponent<RoadSpawner>();    
+        roadSpawner = GetComponent<RoadSpawner>();
+        obstacleSpawner = GetComponent<ObstacleSpawner>();
     }
 
-    public void SpawnTriggerEntered()
+    public void SpawnTriggerEntered(Collider col)
     {
         StartCoroutine(roadSpawner.MoveRoad());
+        obstacleSpawner.SpawnObstacle(col);
     }
 }

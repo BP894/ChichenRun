@@ -9,7 +9,7 @@ public class RoadSpawner : MonoBehaviour
     public List<GameObject> roads;
     private float offset = 8.0f;
 
-    private void Start()
+    private void Awake()
     {
         if( roads != null && roads.Count > 0)
         {
@@ -20,10 +20,10 @@ public class RoadSpawner : MonoBehaviour
     public IEnumerator MoveRoad()
     {
         GameObject movedRoad = roads[0];
+        
+        yield return new WaitForSeconds(5 / playerControler.movementSpeed);
+
         roads.Remove(movedRoad);
-
-        yield return new WaitForSeconds(10 / playerControler.movementSpeed);
-
         float newZ = roads[roads.Count - 1].transform.position.z + offset;
         movedRoad.transform.position = new Vector3(0, 0, newZ);
         roads.Add(movedRoad);
