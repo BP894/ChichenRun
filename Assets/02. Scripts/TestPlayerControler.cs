@@ -6,9 +6,13 @@ public class TestPlayerControler : MonoBehaviour
 {
     public float movementSpeed = 5f;
     public float jumpPower = 5f;
+
     private bool isJump = false;
+    [HideInInspector] public bool isUIOpen = false;
 
     public SpawnManager spawnManager;
+    public UIManager uiManager;
+
     private Rigidbody rigid;
 
     private void Start()
@@ -18,14 +22,17 @@ public class TestPlayerControler : MonoBehaviour
 
     private void Update()
     {
-        if (!isJump)
+        if(!isUIOpen)
         {
-            Move();
-            Rotate();
-        }
-        else
-        {
-            transform.Translate(new Vector3(0, 0, movementSpeed) * Time.deltaTime);
+            if (!isJump)
+            {
+                Move();
+                Rotate();
+            }
+            else
+            {
+                transform.Translate(new Vector3(0, 0, movementSpeed) * Time.deltaTime);
+            }
         }
 
         Jump();
@@ -75,6 +82,7 @@ public class TestPlayerControler : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         spawnManager.SpawnTriggerEntered(other);
+        uiManager.MenuTriggerEntered();
     }
     private void OnCollisionEnter(Collision collision)
     {
