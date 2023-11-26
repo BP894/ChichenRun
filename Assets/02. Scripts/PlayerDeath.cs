@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour
 {
+    public UIManager uiManager;
+
     private void OnCollisionEnter(Collision collision)
     {
+       if(collision.gameObject.GetComponent<BoxCollider>() != null)
+        {
+            Destroy(gameObject);
 
-        //Destroy(collision.gameObject);
-        Debug.Log("게임 종료");
+            uiManager.gameOverUIController.PrimarySetting(true);
+            uiManager.gameOverUIController.SetScore();
+        }
     }
 }

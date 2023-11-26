@@ -12,6 +12,7 @@ public class TestPlayerControler : MonoBehaviour
 
     public SpawnManager spawnManager;
     public UIManager uiManager;
+    public SoundManager soundManager;
 
     private Rigidbody rigid;
 
@@ -33,9 +34,8 @@ public class TestPlayerControler : MonoBehaviour
             {
                 transform.Translate(new Vector3(0, 0, movementSpeed) * Time.deltaTime);
             }
+            Jump();
         }
-
-        Jump();
     }
     private void Move()
     {
@@ -70,6 +70,7 @@ public class TestPlayerControler : MonoBehaviour
             if (!isJump)
             {
                 isJump = true;
+                soundManager.PlayOnJumpSound();
                 transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
                 rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             }

@@ -17,13 +17,16 @@ public class FollowCam : MonoBehaviour
     }
     private void LateUpdate()
     {
-        float currYAngle = Mathf.LerpAngle(tr.eulerAngles.y, target.eulerAngles.y,
+        if(target != null)
+        {
+            float currYAngle = Mathf.LerpAngle(tr.eulerAngles.y, target.eulerAngles.y,
             smoothRotate * Time.deltaTime);
 
-        Quaternion rot = Quaternion.Euler(0, currYAngle, 0);
+            Quaternion rot = Quaternion.Euler(0, currYAngle, 0);
 
-        tr.position = target.position - (rot * Vector3.forward * dist) + (Vector3.up * height);
+            tr.position = target.position - (rot * Vector3.forward * dist) + (Vector3.up * height);
 
-        tr.LookAt(target);
+            tr.LookAt(target);
+        }
     }
 }
